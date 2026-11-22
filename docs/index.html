@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -32,7 +32,8 @@
         --on-green: #eef3ea;
         --on-green-muted: rgb(238 243 234 / 0.72);
         --term: #fbf9f3;
-        --serif: 'Fraunces', 'New York', 'Iowan Old Style', Georgia, serif;
+        /* the app's serif: New York on a Mac, Newsreader (much like it) elsewhere */
+        --serif: ui-serif, 'New York', 'Newsreader', 'Iowan Old Style', Georgia, serif;
         --sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
       }
 
@@ -199,6 +200,92 @@
         font-size: 15.5px;
       }
 
+      /* Pro: a bed of its own, a little grander */
+      .pro {
+        position: relative;
+        max-width: 720px;
+        margin: 88px auto 0;
+        padding: 38px 36px 30px;
+        border-radius: 24px;
+        text-align: center;
+        color: var(--on-green);
+        background:
+          radial-gradient(rgb(255 255 255 / 0.05) 0.7px, transparent 1px) 0 0 / 9px 9px,
+          linear-gradient(160deg, #3a5a3f, #24392a);
+        box-shadow:
+          0 0 0 4px #e7b45f,
+          0 30px 60px -28px rgb(20 40 20 / 0.6);
+      }
+
+      .pro h2 {
+        color: var(--on-green);
+      }
+
+      .soon {
+        position: absolute;
+        top: -14px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 5px 14px;
+        border-radius: 999px;
+        background: #e7b45f;
+        color: #24392a;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .pro-lede {
+        max-width: 520px;
+        margin: 0 auto 22px;
+        color: var(--on-green-muted);
+      }
+
+      .pro-list {
+        display: grid;
+        gap: 10px;
+        max-width: 460px;
+        margin: 0 auto;
+        padding: 0;
+        list-style: none;
+        text-align: left;
+      }
+
+      .pro-list li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .pro-list .leafdot {
+        flex-shrink: 0;
+        width: 10px;
+        height: 10px;
+        border-radius: 50% 50% 50% 0;
+        transform: rotate(-45deg);
+        background: var(--c);
+      }
+
+      .pro-button {
+        margin-top: 26px;
+        border: 0;
+        font: inherit;
+        font-weight: 600;
+        cursor: default;
+        opacity: 0.7;
+      }
+
+      .pro-button:hover {
+        transform: none;
+      }
+
+      .pro-note {
+        margin: 10px 0 0;
+        font-size: 13px;
+        color: var(--on-green-muted);
+      }
+
       /* about the AI: plain words */
       .honest {
         max-width: 720px;
@@ -354,6 +441,24 @@
           <p>Keep your gardens in iCloud Drive if you like. No account, no server, no tracking.</p>
         </section>
       </div>
+
+      <!-- Pro: a placeholder until it's real -->
+      <section class="pro" id="pro">
+        <span class="soon">Coming soon</span>
+        <h2>Parterre Pro</h2>
+        <p class="pro-lede">
+          For people who live in their garden. Parterre stays free; Pro adds
+          more to grow and more ways to work.
+        </p>
+        <ul class="pro-list">
+          <li><span class="leafdot" style="--c: #d98a8f"></span>Rare plants, seasonal collections and more visitors</li>
+          <li><span class="leafdot" style="--c: #9a86c9"></span>Themes made by designers</li>
+          <li><span class="leafdot" style="--c: #8cc0da"></span>Garden plans and layouts on all your Macs</li>
+          <li><span class="leafdot" style="--c: #e7b45f"></span>More for AI sessions, as we learn what helps</li>
+        </ul>
+        <button class="download pro-button" disabled>Coming soon</button>
+        <p class="pro-note">Details and price to come.</p>
+      </section>
 
       <section class="honest">
         <h2>About the AI, plainly</h2>
