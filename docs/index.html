@@ -200,6 +200,42 @@
         font-size: 15.5px;
       }
 
+      /* the windowing */
+      .splits {
+        margin-top: 96px;
+      }
+
+      .splits img.wide {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 16px;
+        box-shadow:
+          0 0 0 1px rgb(0 0 0 / 0.1),
+          0 34px 70px -28px rgb(10 20 12 / 0.6);
+      }
+
+      .points {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 18px;
+        margin: 28px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .points li {
+        display: grid;
+        gap: 2px;
+        padding-left: 14px;
+        border-left: 3px solid var(--leaf);
+      }
+
+      .points span {
+        color: var(--muted);
+        font-size: 15px;
+      }
+
       /* the finished garden, day and night */
       .showcase {
         margin-top: 96px;
@@ -497,6 +533,31 @@
           <p>Keep your gardens in iCloud Drive if you like. No account, no server, no tracking.</p>
         </section>
       </div>
+
+      <!-- the windowing: splits, dark, real work -->
+      <section class="splits">
+        <h2>Your windows, your way</h2>
+        <p class="lede">
+          Columns, a grid, or any split you like: drag a tile onto another's
+          edge to split it, drag the path between them to resize. Claude and
+          Codex side by side, a dev server and git stacked on the right, and a
+          small garden in the corner.
+        </p>
+        <img
+          class="wide"
+          src="splits-dark.jpg"
+          alt="Parterre in dark mode: Claude and Codex sessions side by side, with a dev server, git and a small garden stacked on the right"
+          width="2400"
+          height="1472"
+          loading="lazy"
+        />
+        <ul class="points">
+          <li><b>Split anywhere</b><span>Drop on an edge to split; in the middle to swap.</span></li>
+          <li><b>Resize</b><span>Drag the path; double-click to even it out.</span></li>
+          <li><b>Up to six</b><span>Tiles on screen, more set aside and still running.</span></li>
+          <li><b>Workspaces</b><span>Whole layouts to switch between, saved as plans.</span></li>
+        </ul>
+      </section>
 
       <!-- a finished garden, by day and by night -->
       <section class="showcase">
