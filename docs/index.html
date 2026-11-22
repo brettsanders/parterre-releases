@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Parterre: a calm place to work with AI</title>
+    <meta
+      name="description"
+      content="Parterre puts AI helpers, terminals and little gardens side by side on your Mac. Free, private, made for designers working with AI."
+    />
+    <meta property="og:title" content="Parterre" />
+    <meta property="og:description" content="A calm place to work with AI, on your Mac." />
+    <meta property="og:image" content="screenshot.jpg" />
+    <link rel="icon" href="favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --green: #2d4631;
+        --green-deep: #24392a;
+        --hedge: #4b6e4f;
+        --leaf: #6d8f6a;
+        --cream: #f6f3ea;
+        --paper: #fbf9f3;
+        --stone: #e7dfcd;
+        --text: #26302a;
+        --muted: #6b7266;
+        --on-green: #eef3ea;
+        --on-green-muted: rgb(238 243 234 / 0.72);
+        --term: #fbf9f3;
+        --serif: 'Fraunces', 'New York', 'Iowan Old Style', Georgia, serif;
+        --sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --cream: #141a15;
+          --paper: #1b231c;
+          --stone: #2a332b;
+          --text: #e4e8df;
+          --muted: #a3ab9f;
+          --hedge: #8fbf94;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--cream);
+        color: var(--text);
+        font: 17px/1.6 var(--sans);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      /* the top: deep green, like the garden the tiles sit in */
+      .hero {
+        background:
+          radial-gradient(rgb(255 255 255 / 0.05) 0.7px, transparent 1px) 0 0 / 9px 9px,
+          radial-gradient(rgb(0 0 0 / 0.14) 0.6px, transparent 0.9px) 4px 6px / 13px 13px,
+          linear-gradient(180deg, var(--green), var(--green-deep));
+        color: var(--on-green);
+        text-align: center;
+        padding: 72px 16px 200px;
+      }
+
+      .hero img.icon {
+        width: 112px;
+        height: 112px;
+        filter: drop-shadow(0 12px 24px rgb(0 0 0 / 0.35));
+      }
+
+      h1 {
+        margin: 18px 0 6px;
+        font: 500 clamp(44px, 8vw, 68px) / 1 var(--serif);
+        letter-spacing: 0.01em;
+      }
+
+      .tagline {
+        margin: 0 auto;
+        max-width: 560px;
+        font: 400 clamp(19px, 3vw, 23px) / 1.45 var(--serif);
+        color: var(--on-green-muted);
+      }
+
+      .download {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 32px;
+        padding: 15px 28px;
+        border-radius: 999px;
+        background: var(--cream);
+        background: #f6f3ea;
+        color: #24392a;
+        font-weight: 600;
+        font-size: 17px;
+        text-decoration: none;
+        box-shadow: 0 12px 30px -10px rgb(0 0 0 / 0.5);
+        transition: transform 150ms ease, box-shadow 150ms ease;
+      }
+
+      .download:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 16px 34px -10px rgb(0 0 0 / 0.55);
+      }
+
+      .download svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .meta {
+        margin: 14px 0 0;
+        font-size: 14px;
+        color: var(--on-green-muted);
+      }
+
+      /* the app itself, rising out of the green */
+      .shot {
+        max-width: 1100px;
+        margin: -170px auto 0;
+        padding: 0 16px;
+      }
+
+      .shot img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 16px;
+        box-shadow:
+          0 0 0 1px rgb(0 0 0 / 0.08),
+          0 40px 80px -30px rgb(20 40 20 / 0.55);
+      }
+
+      main {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 72px 16px 40px;
+      }
+
+      h2 {
+        margin: 0 0 10px;
+        text-align: center;
+        font: 500 clamp(30px, 5vw, 40px) / 1.15 var(--serif);
+      }
+
+      .lede {
+        max-width: 620px;
+        margin: 0 auto 44px;
+        text-align: center;
+        color: var(--muted);
+      }
+
+      /* the features: beds in a parterre, two by three */
+      .beds {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 22px;
+      }
+
+      .bed {
+        padding: 22px 22px 20px;
+        border-radius: 18px;
+        background: var(--paper);
+        box-shadow:
+          0 0 0 4px var(--hedge),
+          0 0 0 5px var(--leaf);
+      }
+
+      .bed .leafdot {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin-right: 8px;
+        border-radius: 50% 50% 50% 0;
+        transform: rotate(-45deg);
+        background: var(--c);
+      }
+
+      .bed h3 {
+        margin: 0 0 6px;
+        font: 600 19px/1.3 var(--serif);
+      }
+
+      .bed p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 15.5px;
+      }
+
+      /* about the AI: plain words */
+      .honest {
+        max-width: 720px;
+        margin: 88px auto 0;
+        padding: 30px 32px;
+        border-radius: 22px;
+        background: var(--paper);
+        border: 1px solid var(--stone);
+      }
+
+      .honest h2 {
+        text-align: left;
+        font-size: 28px;
+      }
+
+      .honest ul {
+        margin: 0;
+        padding-left: 20px;
+        color: var(--muted);
+      }
+
+      .honest li {
+        margin: 8px 0;
+      }
+
+      .honest b {
+        color: var(--text);
+      }
+
+      /* the drawing, and the last call */
+      .again {
+        margin: 96px auto 0;
+        text-align: center;
+      }
+
+      .again > svg {
+        width: min(320px, 70vw);
+        height: auto;
+      }
+
+      .again .download {
+        background: var(--green);
+        color: #f6f3ea;
+      }
+
+      .again .meta {
+        color: var(--muted);
+      }
+
+      footer {
+        padding: 40px 16px 56px;
+        text-align: center;
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      footer a {
+        text-underline-offset: 3px;
+      }
+
+      /* the drawing's colours */
+      .path {
+        fill: #e7dfcd;
+      }
+
+      .water {
+        fill: #8cc0da;
+        stroke: #6d8f6a;
+        stroke-width: 3;
+      }
+
+      .hedge {
+        fill: none;
+        stroke: #4b6e4f;
+        stroke-width: 7;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .scroll {
+        fill: none;
+        stroke: #6d8f6a;
+        stroke-width: 3.5;
+        stroke-linecap: round;
+      }
+
+      .topiary {
+        fill: #4b6e4f;
+      }
+
+      .again svg rect[fill='var(--term)'] {
+        fill: #fbf9f3;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <img class="icon" src="icon.png" alt="" width="112" height="112" />
+      <h1>Parterre</h1>
+      <p class="tagline">
+        A calm place to work with AI. Put AI helpers, terminals and little
+        gardens side by side on your Mac.
+      </p>
+      <a
+        class="download"
+        href="https://github.com/brettsanders/parterre-releases/releases/latest/download/Parterre-arm64.dmg"
+      >
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v10m0 0-4-4m4 4 4-4M4 16h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Download for Mac
+      </a>
+      <p class="meta">Free · macOS on Apple silicon (M1 or newer) · updates itself</p>
+    </header>
+
+    <div class="shot">
+      <img
+        src="screenshot.jpg"
+        alt="Parterre: an AI session making a mood board beside a garden with flowers, trees, a pond and a squirrel"
+        width="2400"
+        height="1472"
+      />
+    </div>
+
+    <main>
+      <h2>A garden of tiles</h2>
+      <p class="lede">
+        Each tile is a bed: an AI working in a folder while you watch, your
+        own terminal, or just a garden that grows while you work.
+      </p>
+
+      <div class="beds">
+        <section class="bed">
+          <h3><span class="leafdot" style="--c: #9a86c9"></span>AI, side by side</h3>
+          <p>Run Claude Code, Codex, Gemini or any AI tool in a folder. A few at once, each in its own bed, each labelled.</p>
+        </section>
+        <section class="bed">
+          <h3><span class="leafdot" style="--c: #d98a8f"></span>Arrange it your way</h3>
+          <p>Columns or a grid, or drag a tile onto another's edge to split it. Drag the path between them to resize.</p>
+        </section>
+        <section class="bed">
+          <h3><span class="leafdot" style="--c: #a3b88f"></span>Gardens that grow</h3>
+          <p>Plant flowers, trees and lawns. Water them, add compost, dig a pond. Squirrels, frogs and robins come to visit.</p>
+        </section>
+        <section class="bed">
+          <h3><span class="leafdot" style="--c: #e7b45f"></span>Weather and seasons</h3>
+          <p>Morning light, rain, fog and fireflies at night. Blossom in spring, gold leaves in autumn, snow in winter.</p>
+        </section>
+        <section class="bed">
+          <h3><span class="leafdot" style="--c: #7fa66f"></span>Nothing is lost</h3>
+          <p>Set a tile aside and it keeps running. Put it in the Shed and it waits, conversation and all, until you bring it back.</p>
+        </section>
+        <section class="bed">
+          <h3><span class="leafdot" style="--c: #8cc0da"></span>On all your Macs</h3>
+          <p>Keep your gardens in iCloud Drive if you like. No account, no server, no tracking.</p>
+        </section>
+      </div>
+
+      <section class="honest">
+        <h2>About the AI, plainly</h2>
+        <ul>
+          <li><b>Parterre has no AI of its own</b> and sends nothing anywhere.</li>
+          <li>An AI session runs a tool already on your Mac, on <b>your own account</b>: Claude Code to start, or another you prefer.</li>
+          <li>What you ask it, and the files it reads in that folder, go to <b>that company</b> so it can answer. It works only in the folder you pick, and asks before changing things.</li>
+          <li>Gardens and terminals need no AI at all.</li>
+        </ul>
+      </section>
+
+      <section class="again">
+        <!-- the parterre drawing -->
+        <svg viewBox="0 0 400 300" role="img" aria-label="A parterre garden seen from above">
+          <rect class="path" x="20" y="20" width="360" height="260" rx="18"/>
+          <rect x="40" y="40" width="145" height="95" rx="12" fill="var(--term)"/>
+          <path class="scroll" d="M56 87.5 C 66 56, 98.5 56, 106.5 87.5 S 82.5 121, 56 87.5"/>
+          <path class="scroll" d="M169 87.5 C 159 56, 126.5 56, 118.5 87.5 S 142.5 121, 169 87.5"/>
+          <path class="scroll" d="M112.5 54 C 122.5 77.5, 122.5 97.5, 112.5 121 C 102.5 97.5, 102.5 77.5, 112.5 54"/>
+          <circle class="bloom" cx="74.5" cy="67.5" r="4.5" fill="#9a86c9"/>
+          <circle class="bloom" cx="150.5" cy="67.5" r="4.5" fill="#9a86c9"/>
+          <circle class="bloom" cx="74.5" cy="107.5" r="4.5" fill="#9a86c9"/>
+          <circle class="bloom" cx="150.5" cy="107.5" r="4.5" fill="#9a86c9"/>
+          <circle class="bloom" cx="112.5" cy="87.5" r="4.5" fill="#9a86c9"/>
+          <rect class="hedge" x="40" y="40" width="145" height="95" rx="12"/>
+          <rect x="215" y="40" width="145" height="95" rx="12" fill="var(--term)"/>
+          <path class="scroll" d="M231 87.5 C 241 56, 273.5 56, 281.5 87.5 S 257.5 121, 231 87.5"/>
+          <path class="scroll" d="M344 87.5 C 334 56, 301.5 56, 293.5 87.5 S 317.5 121, 344 87.5"/>
+          <path class="scroll" d="M287.5 54 C 297.5 77.5, 297.5 97.5, 287.5 121 C 277.5 97.5, 277.5 77.5, 287.5 54"/>
+          <circle class="bloom" cx="249.5" cy="67.5" r="4.5" fill="#d98a8f"/>
+          <circle class="bloom" cx="325.5" cy="67.5" r="4.5" fill="#d98a8f"/>
+          <circle class="bloom" cx="249.5" cy="107.5" r="4.5" fill="#d98a8f"/>
+          <circle class="bloom" cx="325.5" cy="107.5" r="4.5" fill="#d98a8f"/>
+          <circle class="bloom" cx="287.5" cy="87.5" r="4.5" fill="#d98a8f"/>
+          <rect class="hedge" x="215" y="40" width="145" height="95" rx="12"/>
+          <rect x="40" y="165" width="145" height="95" rx="12" fill="var(--term)"/>
+          <path class="scroll" d="M56 212.5 C 66 181, 98.5 181, 106.5 212.5 S 82.5 246, 56 212.5"/>
+          <path class="scroll" d="M169 212.5 C 159 181, 126.5 181, 118.5 212.5 S 142.5 246, 169 212.5"/>
+          <path class="scroll" d="M112.5 179 C 122.5 202.5, 122.5 222.5, 112.5 246 C 102.5 222.5, 102.5 202.5, 112.5 179"/>
+          <circle class="bloom" cx="74.5" cy="192.5" r="4.5" fill="#a3b88f"/>
+          <circle class="bloom" cx="150.5" cy="192.5" r="4.5" fill="#a3b88f"/>
+          <circle class="bloom" cx="74.5" cy="232.5" r="4.5" fill="#a3b88f"/>
+          <circle class="bloom" cx="150.5" cy="232.5" r="4.5" fill="#a3b88f"/>
+          <circle class="bloom" cx="112.5" cy="212.5" r="4.5" fill="#a3b88f"/>
+          <rect class="hedge" x="40" y="165" width="145" height="95" rx="12"/>
+          <rect x="215" y="165" width="145" height="95" rx="12" fill="var(--term)"/>
+          <path class="scroll" d="M231 212.5 C 241 181, 273.5 181, 281.5 212.5 S 257.5 246, 231 212.5"/>
+          <path class="scroll" d="M344 212.5 C 334 181, 301.5 181, 293.5 212.5 S 317.5 246, 344 212.5"/>
+          <path class="scroll" d="M287.5 179 C 297.5 202.5, 297.5 222.5, 287.5 246 C 277.5 222.5, 277.5 202.5, 287.5 179"/>
+          <circle class="bloom" cx="249.5" cy="192.5" r="4.5" fill="#e6d9b8"/>
+          <circle class="bloom" cx="325.5" cy="192.5" r="4.5" fill="#e6d9b8"/>
+          <circle class="bloom" cx="249.5" cy="232.5" r="4.5" fill="#e6d9b8"/>
+          <circle class="bloom" cx="325.5" cy="232.5" r="4.5" fill="#e6d9b8"/>
+          <circle class="bloom" cx="287.5" cy="212.5" r="4.5" fill="#e6d9b8"/>
+          <rect class="hedge" x="215" y="165" width="145" height="95" rx="12"/>
+          <circle cx="200" cy="150" r="30" class="path"/>
+          <circle class="water" cx="200" cy="150" r="17"/>
+          <circle class="hedge" cx="200" cy="150" r="30"/>
+          <circle class="topiary" cx="30" cy="30" r="7"/>
+          <circle class="topiary" cx="370" cy="30" r="7"/>
+          <circle class="topiary" cx="30" cy="270" r="7"/>
+          <circle class="topiary" cx="370" cy="270" r="7"/>
+          <circle class="topiary" cx="200" cy="30" r="7"/>
+          <circle class="topiary" cx="200" cy="270" r="7"/>
+          <circle class="topiary" cx="30" cy="150" r="7"/>
+          <circle class="topiary" cx="370" cy="150" r="7"/>
+          <rect class="hedge" x="20" y="20" width="360" height="260" rx="18"/>
+        </svg>
+        <div>
+          <a
+            class="download"
+            href="https://github.com/brettsanders/parterre-releases/releases/latest/download/Parterre-arm64.dmg"
+          >
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v10m0 0-4-4m4 4 4-4M4 16h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download Parterre
+          </a>
+          <p class="meta">Version 0.1.3 · Open it, drag it to Applications, and plant something.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Parterre is free. A parterre is a formal garden of neat beds.
+    </footer>
+  </body>
+</html>
